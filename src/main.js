@@ -11,21 +11,21 @@ const menuLinks = [...document.querySelectorAll('.menu-overlay a')];
 const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 let isMenuOpen = false;
-function setMenu(open) {
+function setMenu(open, { restoreFocus = true } = {}) {
+  if (!open && isMenuOpen && restoreFocus) {
+    // Move focus out before making the overlay inert to screen readers.
+    menuTrigger.focus({ preventScroll: true });
+  }
   isMenuOpen = open;
   body.classList.toggle('menu-open', open);
   menuTrigger.setAttribute('aria-expanded', String(open));
   menuTrigger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   menuOverlay.setAttribute('aria-hidden', String(!open));
   menuOverlay.inert = !open;
-  if (open) {
-    menuLinks[0]?.focus({ preventScroll: true });
-  } else {
-    menuTrigger.focus({ preventScroll: true });
-  }
+  if (open) menuLinks[0]?.focus({ preventScroll: true });
 }
 menuTrigger.addEventListener('click', () => setMenu(!isMenuOpen));
-menuLinks.forEach(link => link.addEventListener('click', () => setMenu(false)));
+menuLinks.forEach(link => link.addEventListener('click', () => setMenu(false, { restoreFocus: false })));
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && isMenuOpen) setMenu(false);
   if (event.key === 'Tab' && isMenuOpen) {
@@ -46,6 +46,7 @@ function updateScrollState() {
   progressBar.style.transform = `scaleX(${total > 0 ? Math.min(y / total, 1) : 0})`;
   ticking = false;
 }
+window.addEventListener('resize', updateScrollState, { passive: true });
 window.addEventListener('scroll', () => {
   if (!ticking) { ticking = true; requestAnimationFrame(updateScrollState); }
 }, { passive: true });
@@ -66,20 +67,24 @@ const animations = gsap.context(() => {
     .from('.hero__bottom', { y: 10, opacity: 0, duration: .7 }, 1.13);
 
   // Parallax is intentionally subtle to preserve photographic art direction.
-  gsap.to('.hero__photo', {
-    yPercent: 10, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+  // Smaller travel prevents the subject drifting out of frame; disable on phones.
+  const desktopHero = gsap.matchMedia();
+  desktopHero.add('(min-width: 641px)', () => {
+    gsap.to('.hero__photo', {
+      yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+    gsap.to('.hero__contents', {
+      yPercent: 8, opacity: .68, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
   });
-  gsap.to('.hero__contents', {
-    yPercent: 16, opacity: .45, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
-  });
-  gsap.fromTo('.identity__image-wrap img', { scale: 1.1, yPercent: -3 }, {
-    scale: 1, yPercent: 3, ease: 'none',
+  gsap.fromTo('.identity__image-wrap img', { scale: 1.045, yPercent: -1.5 }, {
+    scale: 1, yPercent: 1.5, ease: 'none',
     scrollTrigger: { trigger: '.identity', start: 'top bottom', end: 'bottom top', scrub: 1 }
   });
-  gsap.fromTo('.live__image img', { scale: 1.14, yPercent: -3 }, {
-    scale: 1.04, yPercent: 3, ease: 'none',
+  gsap.fromTo('.live__image img', { scale: 1.025, yPercent: -0.5 }, {
+    scale: 1, yPercent: 0.5, ease: 'none',
     scrollTrigger: { trigger: '.live', start: 'top bottom', end: 'bottom top', scrub: 1 }
   });
 
