@@ -78,8 +78,8 @@ const animations = gsap.context(() => {
     scale: 1, yPercent: 3, ease: 'none',
     scrollTrigger: { trigger: '.identity', start: 'top bottom', end: 'bottom top', scrub: 1 }
   });
-  gsap.fromTo('.live__image img', { scale: 1.14, yPercent: -3 }, {
-    scale: 1.04, yPercent: 3, ease: 'none',
+  gsap.fromTo('.live__image img', { scale: 1.025, yPercent: -0.4 }, {
+    scale: 1, yPercent: 0.4, ease: 'none',
     scrollTrigger: { trigger: '.live', start: 'top bottom', end: 'bottom top', scrub: 1 }
   });
 
