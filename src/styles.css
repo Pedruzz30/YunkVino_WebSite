@@ -238,7 +238,15 @@ h1,h2,h3,p,figure { margin: 0; }
   .menu-overlay__meta, .menu-overlay__bottom { font-size: 8px; }
   .hero { height: 100svh; min-height: 650px; max-height: 950px; }
   .hero__photo-wrap { inset: 4% 0 20% 0; }
-  .hero__photo { object-position: 56% 45%; filter: contrast(1.28) brightness(.76); }
+  
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 85% 45%;
+  filter: contrast(1.12) brightness(.88);
+}
+
   .hero__photo-wrap::after { background: linear-gradient(0deg, var(--black) 0%, rgba(11,11,13,.16) 40%, rgba(11,11,13,.18) 80%, var(--black) 100%), linear-gradient(90deg, rgba(0,0,0,.3), transparent); }
   .hero__light { background: linear-gradient(0deg, var(--black), transparent 44%); }
   .hero__left-index { left: var(--gutter); top: 37%; font-size: 9px; }
