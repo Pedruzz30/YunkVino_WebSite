@@ -374,3 +374,25 @@ h1,h2,h3,p,figure { margin: 0; }
     );
   }
 }
+
+.live__image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.live__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: none;
+}
+
+.live__image::after {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, .35),
+    transparent 45%
+  );
+}
