@@ -11,6 +11,7 @@
     <meta property="og:image" content="/assets/heroYK.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/live-v2.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -155,7 +156,12 @@
 
       <!-- CHAPTER 05 / LIVE -->
       <section class="live" id="live" aria-labelledby="live-title">
-        <div class="live__image" aria-hidden="true"><img src="/assets/live-monochrome.webp" alt="" loading="lazy" /></div>
+        <div class="live__image" aria-hidden="true">
+          <picture class="live__picture">
+            <source media="(max-width: 640px)" srcset="/assets/yunk-live-v2-mobile.webp" />
+            <img src="/assets/yunk-live-v2-desktop.webp" alt="" loading="lazy" decoding="async" />
+          </picture>
+        </div>
         <div class="live__top mono"><span><span class="accent">05</span> / ON STAGE</span><span>THE ENERGY / THE CROWD / THE MOMENT</span></div>
         <div class="live__title-wrap"><p class="serif live__subtitle" data-reveal>When the lights go down</p><h2 id="live-title" class="live__title" data-reveal>FEEL<br>IT<span class="accent">.</span></h2></div>
         <div class="live__bottom mono"><span>LIVE EXPERIENCES / CAPTURED MOMENTS</span><span>05 / 006</span></div>
