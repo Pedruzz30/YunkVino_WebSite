@@ -8,7 +8,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Yunk Vino — The Visual Archive [Unofficial Concept]" />
     <meta property="og:description" content="More than music. An independent digital art direction and development concept by Space Underground." />
-    <meta property="og:image" content="/assets/hero.webp" />
+    <meta property="og:image" content="/assets/heroYK.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,9 +50,18 @@
     <main id="main">
       <!-- CHAPTER 01 / HERO -->
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero__photo-wrap" aria-hidden="true">
-          <img class="hero__photo" src="/assets/hero.webp" alt="" fetchpriority="high" />
-        </div>
+        <picture class="hero__photo-wrap" aria-hidden="true">
+  <source
+    media="(max-width: 640px)"
+    srcset="/assets/heroYK.png"
+  />
+  <img
+    class="hero__photo"
+    src="/assets/hero-desktop.png"
+    alt=""
+    fetchpriority="high"
+  />
+</picture>
         <div class="hero__light" aria-hidden="true"></div>
         <div class="hero__left-index mono"><span class="accent">01</span> / THE ARTIST</div>
         <div class="hero__contents">
