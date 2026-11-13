@@ -1,0 +1,204 @@
+/* YUNK VINO — EDITORIAL REFINEMENT V4
+   Intent: a featured release and a calmer photo-essay rhythm.
+   Loaded after the main stylesheet and V3 polish to keep changes isolated. */
+
+/* CHAPTER 03 / THE SOUND
+   MR. gets a true editorial lead. Other releases stay fully accessible. */
+.releases {
+  grid-template-columns: minmax(0, 1.38fr) repeat(2, minmax(0, .92fr));
+  align-items: start;
+  gap: clamp(16px, 2.2vw, 38px);
+}
+.release {
+  position: relative;
+  isolation: isolate;
+}
+.release--hero .release__image {
+  height: clamp(480px, 43vw, 690px);
+}
+.releases > .release:not(.release--hero) {
+  margin-top: clamp(45px, 7vw, 110px);
+}
+.releases > .release:not(.release--hero) .release__image {
+  height: clamp(310px, 31vw, 485px);
+}
+.release--hero .release__image img {
+  filter: saturate(.97) contrast(1.015);
+}
+.releases > .release:not(.release--hero) .release__image img {
+  filter: saturate(.75) contrast(1.025);
+}
+.release__featured-marker {
+  position: absolute;
+  z-index: 3;
+  top: clamp(15px, 1.8vw, 26px);
+  left: clamp(15px, 1.8vw, 26px);
+  padding: 6px 11px;
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: #f7eee7;
+  background: rgba(10, 10, 12, .77);
+  border-left: 3px solid #df2850;
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  pointer-events: none;
+}
+.release--hero h3 {
+  font-size: clamp(40px, 4vw, 72px);
+}
+.release__meta {
+  position: relative;
+  padding-bottom: 12px;
+}
+.release__meta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(239, 234, 226, .29);
+  transform-origin: left center;
+  transition: background .3s ease, height .3s ease;
+}
+.release:hover .release__meta::after,
+.release:focus-visible .release__meta::after {
+  height: 2px;
+  background: #df2850;
+}
+.release--hero .release__number {
+  color: #f0e8e1;
+}
+.release__inside {
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .95);
+}
+
+/* CHAPTER 04 / ARCHIVE — preserve desktop editorial grid. */
+.archive-grid {
+  gap: clamp(16px, 1.7vw, 26px);
+}
+.archive-tile figcaption {
+  align-items: flex-start;
+  color: #e0d9d4;
+  font-size: 10px;
+  letter-spacing: .09em;
+  line-height: 1.55;
+}
+.archive-tile figcaption span:last-child {
+  color: #c5bbb7;
+}
+
+/* Tablet: lead release becomes a full-width editorial spread. */
+@media (min-width: 641px) and (max-width: 1050px) {
+  .releases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 20px;
+  }
+  .release--hero { grid-column: 1 / -1; }
+  .release--hero .release__image {
+    height: clamp(420px, 54vw, 570px);
+  }
+  .releases > .release:not(.release--hero) {
+    margin-top: 0;
+  }
+  .releases > .release:not(.release--hero) .release__image {
+    height: clamp(290px, 40vw, 450px);
+  }
+  .archive-tile figcaption { font-size: 10px; }
+}
+
+/* Mobile: a clear feature release, then a slower photographic story. */
+@media (max-width: 640px) {
+  .releases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 35px 14px;
+  }
+  .release--hero { grid-column: 1 / -1; }
+  .release--hero .release__image {
+    height: clamp(350px, 113vw, 520px);
+  }
+  .releases > .release:not(.release--hero) {
+    margin-top: 0;
+  }
+  .releases > .release:not(.release--hero) .release__image {
+    height: clamp(210px, 55vw, 300px);
+  }
+  .release__featured-marker {
+    top: 17px;
+    left: 17px;
+    font-size: 10px;
+  }
+  .release--hero h3 { font-size: clamp(40px, 11vw, 55px); }
+  .release__number { font-size: 10px; }
+  .release__inside { font-size: 9px; }
+  .release__meta { gap: 7px; padding-bottom: 10px; }
+  .release__link-arrow { font-size: 26px; }
+
+  .archive-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    gap: clamp(30px, 7.4vw, 48px);
+  }
+  .archive-tile--a,
+  .archive-tile--b,
+  .archive-tile--c,
+  .archive-tile--d {
+    grid-column: 1;
+    grid-row: auto;
+    min-width: 0;
+  }
+  .archive-tile--a { width: 100%; justify-self: stretch; }
+  .archive-tile--b { width: 89%; justify-self: end; }
+  .archive-tile--c { width: 95%; justify-self: start; }
+  .archive-tile--d { width: 88%; justify-self: end; }
+
+  .archive-tile__image {
+    width: 100%;
+    flex: none;
+    min-height: 0;
+  }
+  .archive-tile--a .archive-tile__image { aspect-ratio: 4 / 5; }
+  .archive-tile--b .archive-tile__image { aspect-ratio: 4 / 3; }
+  .archive-tile--c .archive-tile__image { aspect-ratio: 4 / 5; }
+  .archive-tile--d .archive-tile__image { aspect-ratio: 4 / 3; }
+
+  .archive-tile--a img { object-position: center 43%; }
+  .archive-tile--b img { object-position: center 55%; }
+  .archive-tile--c img { object-position: center 35%; }
+  .archive-tile--d img { object-position: center 40%; }
+
+  .archive-tile figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 12px;
+    color: #ede7e1;
+    font-size: 10px;
+    line-height: 1.55;
+  }
+  .archive-tile figcaption span:last-child {
+    display: inline;
+    color: #c6bbb7;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+}
+
+/* Very narrow phones: secondary albums get enough width for their titles. */
+@media (max-width: 380px) {
+  .releases { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+  .release--hero { grid-column: 1; }
+  .releases > .release:not(.release--hero) .release__image {
+    height: min(102vw, 390px);
+  }
+  .releases > .release:not(.release--hero) h3 {
+    font-size: clamp(32px, 10vw, 43px);
+  }
+  .archive-tile--b,
+  .archive-tile--c,
+  .archive-tile--d { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .release__meta::after { transition: none; }
+}
